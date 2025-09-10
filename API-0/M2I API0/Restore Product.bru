@@ -1,0 +1,15 @@
+meta {
+  name: Restore Product
+  type: http
+  seq: 9
+}
+
+patch {
+  url: http://localhost:3000/produits/restore/4
+  body: json
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

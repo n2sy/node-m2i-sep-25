@@ -1,16 +1,17 @@
 const { produitListe, produit_schema } = require("../models/produit.model");
 
 exports.getAllProducts = (req, res) => {
+  let tab = produitListe.filter((element) => element.isDeleted == false);
   res.json({
     message: "Liste des produits récupérée avec succès",
-    produits: produitListe,
+    produits: tab,
   });
 };
 exports.getProductById = (req, res) => {
   let selectedProduit = produitListe.find(
     (element) => element.id == req.params.id
   );
-  if (!selectedProduit)
+  if (!selectedProduit || selectedProduit.isDeleted)
     res.status(404).json({
       message: `Aucun produit n'existe avec cet id`,
     });
@@ -27,6 +28,7 @@ exports.addProduct = (req, res) => {
       message: `Vérifiez vos données d'entrée`,
     });
   newProduct.id = crypto.randomUUID();
+  newProduct.isDeleted = false;
   produitListe.push(req.body);
   res.status(202).json({
     message: "Produit ajouté avec succès",
@@ -76,5 +78,37 @@ exports.searchProduct = (req, res) => {
     produits: resultat,
   });
 };
-exports.softDeleteProduct = (req, res) => {};
-exports.restoreProduct = (req, res) => {};
+exports.softDeleteProduct = (req, res) => {
+  let selectedId = req.params.id;
+  let i = produitListe.findIndex((element) => element.id == selectedId);
+  if (i == -1)
+    res.status(404).json({
+      message: `Aucun produit n'existe avec cet id`,
+    });
+  else {
+    produitListe[i].isDeleted = true;
+
+    let message = "Produit supprimé";
+    res.json({
+      message,
+      produits: produitListe,
+    });
+  }
+};
+exports.restoreProduct = (req, res) => {
+  let selectedId = req.params.id;
+  let i = produitListe.findIndex((element) => element.id == selectedId);
+  if (i == -1)
+    res.status(404).json({
+      message: `Aucun produit n'existe avec cet id`,
+    });
+  else {
+    produitListe[i].isDeleted = false;
+
+    let message = "Produit supprimé";
+    res.json({
+      message,
+      produits: produitListe,
+    });
+  }
+};

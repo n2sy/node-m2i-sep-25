@@ -1,0 +1,15 @@
+meta {
+  name: Soft Delete Product
+  type: http
+  seq: 7
+}
+
+delete {
+  url: http://localhost:3000/produits/softdelete/1
+  body: json
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

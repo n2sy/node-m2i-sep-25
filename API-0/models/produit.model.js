@@ -5,24 +5,28 @@ var produitListe = [
     nom: "Produit 1",
     prix: 1312,
     statut: "disponible",
+    isDeleted: false,
   },
   {
     id: 2,
     nom: "Produit 2",
     prix: 77,
     statut: "indisponible",
+    isDeleted: false,
   },
   {
     id: 3,
     nom: "Produit 3",
     prix: 543,
     statut: "epuise",
+    isDeleted: false,
   },
   {
     id: 4,
     nom: "Produit 4",
     prix: 400,
     statut: "disponible",
+    isDeleted: false,
   },
 ];
 
