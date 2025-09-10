@@ -33,5 +33,37 @@ exports.addProduct = (req, res) => {
     listeProduits: produitListe,
   });
 };
-exports.updateProduct = (req, res) => {};
-exports.deleteProduct = (req, res) => {};
+exports.updateProduct = (req, res) => {
+  let selectedId = req.params.identifiant;
+  let i = produitListe.findIndex((element) => element.id == selectedId);
+  if (i == -1)
+    res.status(404).json({
+      message: `Aucun produit n'existe avec cet id`,
+    });
+  else {
+    req.body.id = selectedId;
+    produitListe[i] = req.body;
+    let message = "Produit mis à jour";
+    res.json({
+      message,
+      produits: produitListe,
+    });
+  }
+};
+exports.deleteProduct = (req, res) => {
+  let selectedId = req.params.id;
+  let i = produitListe.findIndex((element) => element.id == selectedId);
+  if (i == -1)
+    res.status(404).json({
+      message: `Aucun produit n'existe avec cet id`,
+    });
+  else {
+    produitListe.splice(i, 1);
+
+    let message = "Produit supprimé";
+    res.json({
+      message,
+      produits: produitListe,
+    });
+  }
+};
