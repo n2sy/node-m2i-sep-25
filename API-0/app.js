@@ -2,6 +2,7 @@ const express = require("express");
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 let produits = [
   {
     titre: "produit 1",
@@ -19,14 +20,22 @@ app.post("/add", (req, res) => {
   res.json({ message: "Produit ajouté avec succès", listeProduits: produits });
 });
 
-app.get("/", (request, response) => {
+app.get("/test", (request, response) => {
   console.log(request);
 
   response.send("<h1>Premier test de réponse</h1>");
 });
 
-app.get("/fichier", (request, response) => {
+app.get("/", (request, response) => {
   response.sendFile(__dirname + "/index.html");
+});
+app.post("/new", (request, response) => {
+  console.log(request.body);
+
+  produits.push(request.body);
+  response.send(
+    `<h3> Produit (${request.body.titre} - ${request.body.prix}) ajouté avec succès</h3>`
+  );
 });
 
 app.listen(3000, () => {

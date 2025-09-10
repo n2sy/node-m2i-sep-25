@@ -6,6 +6,17 @@
     <title>Document</title>
   </head>
   <body>
-    <div>Fichier HTML retourné par Express JS</div>
+    <form action="/new" method="POST">
+      <label for="">Titre</label>
+      <input name="titre" type="text" />
+      <label for="">Prix</label>
+      <input name="prix" type="number" />
+      <label for="">Promo Min</label>
+      <input name="infos[promoMin]" type="number" />
+      <label for="">Promo Max</label>
+      <input name="infos[promoMax]" type="number" />
+      <br />
+      <button type="submit">Ajouter Produit</button>
+    </form>
   </body>
 </html>
