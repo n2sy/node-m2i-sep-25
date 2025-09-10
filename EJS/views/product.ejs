@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include("header") %>
+    <h1>Titre : <%= title %></h1>
+    <hr />
+    <% if(show) { %>
+    <div>Affichage activé</div>
+    <% } else { %>
+    <div>Affichage désactivé</div>
+    <% } %>
+
+    <hr />
+    <ol>
+      <% produits.forEach(element => { %>
+      <li><%= element.nom %> : <%= element.prix %> €</li>
+      <% }) %>
+    </ol>
+
+    <hr />
+    <% if(typeof message !== 'undefined') { %>
+    <h4 style="color: green"><%= message %></h4>
+    <% } %>
+    <hr />
+    <form action="/add" method="post">
+      <label for="">Nom du Produit</label>
+      <input name="nom" type="text" />
+      <br />
+      <label for="">Prix du Produit</label>
+      <input name="prix" type="text" />
+      <br />
+      <button type="submit">Ajouter Produit</button>
+    </form>
+    <%- include("footer") %>
+  </body>
+</html>

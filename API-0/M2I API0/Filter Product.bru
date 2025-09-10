@@ -1,13 +1,18 @@
 meta {
-  name: Get Product
+  name: Filter Product
   type: http
-  seq: 4
+  seq: 10
 }
 
 get {
-  url: http://localhost:3000/produits/4
+  url: http://localhost:3000/produits/filter?prix1=200&prix2=800
   body: json
   auth: inherit
+}
+
+params:query {
+  prix1: 200
+  prix2: 800
 }
 
 body:json {

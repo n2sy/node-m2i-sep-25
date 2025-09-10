@@ -8,6 +8,8 @@ exports.getAllProducts = (req, res) => {
   });
 };
 exports.getProductById = (req, res) => {
+  console.log("ID=", req.params.id);
+
   let selectedProduit = produitListe.find(
     (element) => element.id == req.params.id
   );
