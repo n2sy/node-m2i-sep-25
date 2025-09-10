@@ -76,3 +76,5 @@ exports.searchProduct = (req, res) => {
     produits: resultat,
   });
 };
+exports.softDeleteProduct = (req, res) => {};
+exports.restoreProduct = (req, res) => {};

@@ -8,5 +8,7 @@ router.get("/filter", produitController.searchProduct);
 router.post("/add", produitController.addProduct);
 router.put("/edit/:identifiant", produitController.updateProduct);
 router.delete("/delete/:id", produitController.deleteProduct);
+router.delete("/softdelete/:id", produitController.softDeleteProduct);
+router.patch("/restore/:id", produitController.restoreProduct);
 
 module.exports = router;
