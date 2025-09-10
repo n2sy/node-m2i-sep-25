@@ -29,7 +29,7 @@ var produitListe = [
 var produit_schema = Joi.object({
   nom: Joi.string().min(3).required(),
   prix: Joi.number().positive().min(50).max(2000).required(),
-  statut: Joi.string(),
+  statut: Joi.string().valid("disponible", "indisponible", "epuise").required(),
 });
 
 module.exports.produitListe = produitListe;
