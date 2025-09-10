@@ -1,3 +1,4 @@
+var Joi = require("joi");
 var produitListe = [
   {
     id: 1,
@@ -24,3 +25,12 @@ var produitListe = [
     statut: "disponible",
   },
 ];
+
+var produit_schema = Joi.object({
+  nom: Joi.string().min(3).required(),
+  prix: Joi.number().positive().min(50).max(2000).required(),
+  statut: Joi.string(),
+});
+
+module.exports.produitListe = produitListe;
+module.exports.produit_schema = produit_schema;
