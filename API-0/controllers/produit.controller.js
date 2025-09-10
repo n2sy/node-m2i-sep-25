@@ -67,3 +67,12 @@ exports.deleteProduct = (req, res) => {
     });
   }
 };
+exports.searchProduct = (req, res) => {
+  let resultat = produitListe.filter(
+    (prod) =>
+      prod.prix >= Number(req.query.prix1) && prod.prix <= req.query.prix2
+  );
+  res.json({
+    produits: resultat,
+  });
+};

@@ -3,7 +3,7 @@ var produitListe = [
   {
     id: 1,
     nom: "Produit 1",
-    prix: 312,
+    prix: 1312,
     statut: "disponible",
   },
   {
