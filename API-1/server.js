@@ -1,8 +1,11 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const bookRoutes = require("./routes/book.routes");
 require("dotenv").config();
 
 const app = express();
+
+app.use("/books", bookRoutes);
 
 const startServer = async () => {
   try {
