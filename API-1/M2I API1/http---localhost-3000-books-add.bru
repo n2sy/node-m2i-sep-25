@@ -1,0 +1,25 @@
+meta {
+  name: http://localhost:3000/books/add
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3001/books/add
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "L'etranger",
+    "author" : "Albert Camus",
+    "year": 2002,
+    "avatar" : "cover.jpg",
+    "genre" : "drame"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
