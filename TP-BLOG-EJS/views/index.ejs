@@ -1,0 +1,28 @@
+<h1>📚 Mon Blog Express</h1>
+
+Barre de recherche
+<div class="search-form">
+  <form method="GET">
+    <input
+      type="text"
+      name="search"
+      placeholder="Rechercher un article..."
+      value="<%= search %>"
+    />
+    <button type="submit">🔍 Rechercher</button>
+    <% if (search) { %>
+    <a href="/" style="margin-left: 10px">❌ Effacer</a>
+    <% } %>
+  </form>
+</div>
+
+<p class="meta">
+  <% if (search) { %> Résultats pour "<strong><%= search %></strong>" : <%=
+  articles.length %> article(s) trouvé(s) <% } else { %> Total : <%=
+  totalArticles %> article(s) <% } %>
+</p>
+
+<!--  Afficher "Aucun article trouvé" si aucun article n'est trouvé
+ Sinon afficher tous les articles correspondant à ce qui a été tapé dans la barre de recherche
+ Sinon afficher tous les articles -->
+<% if (articles.length === 0) { %> <% } else { %>
