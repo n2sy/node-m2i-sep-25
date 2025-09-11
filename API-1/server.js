@@ -9,6 +9,17 @@ app.use(express.json());
 
 app.use("/books", bookRoutes);
 
+//Le middleware de gestion des erreurs doit toujours être le dernier
+app.use((error, req, res, next) => {
+  const status = error.statusCode || 500;
+  const message = error.message;
+  console.log("On se retrouve dans le middleware de gestion des erreurs ");
+
+  res.status(status).json({
+    message,
+  });
+});
+
 const startServer = async () => {
   try {
     await connectDB();

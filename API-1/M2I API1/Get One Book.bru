@@ -1,0 +1,15 @@
+meta {
+  name: Get One Book
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3001/books/68c2ce5dbc4e5766d3e7eefc
+  body: json
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

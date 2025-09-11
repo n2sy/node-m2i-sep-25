@@ -1,0 +1,27 @@
+meta {
+  name: Update Book
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3001/books/edit/68c2cfd9bc4e5766d3e7ef01
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "title": "Toi et Moi revisité",
+      "author": "Vincent et Laurent",
+      "year": 2019,
+      "genre": "tragédie",
+      "avatar": "cover.jpg",
+      "isDeleted": false,
+      "deleteAt": null
+  }
+}
+
+settings {
+  encodeUrl: true
+}
