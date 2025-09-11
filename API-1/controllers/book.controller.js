@@ -69,5 +69,21 @@ exports.deleteBook = async (req, res, next) => {
     next(err);
   }
 };
+exports.restoreBook = async (req, res, next) => {
+  try {
+    let b = await Book.findOne({ _id: req.params.id, isDeleted: true });
+    if (!b) {
+      let error = new Error("Aucun Livre (supprimé) n'existe avec cet id");
+      error.statusCode = 404;
+      throw error;
+    }
+    b.isDeleted = false;
+    b.deleteAt = null;
+    b.save();
+    return res.json({ message: "Livre restauré avec succès" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.searchBook = (req, res) => {};
-exports.restoreBook = (req, res) => {};
