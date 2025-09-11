@@ -1,4 +1,24 @@
-<!-- Affiche tous les articles d'un auteur donnée -->
+<h1>👤 Articles de <%= authorName %></h1>
+
+<% if (articles.length === 0) { %>
+<p>Aucun article trouvé pour cet auteur.</p>
+<% } else { %>
+<p class="meta"><%= articles.length %> article(s) publié(s)</p>
+
+<% articles.forEach(article => { %>
+<div class="article-card">
+  <h2><a href="/article/<%= article.id %>"><%= article.title %></a></h2>
+  <div class="meta">
+    Publié le <%= article.date.toLocaleDateString('fr-FR') %>
+  </div>
+  <p><%= article.content.substring(0, 150) %>...</p>
+  <div>
+    <% article.tags.forEach(tag => { %>
+    <span class="tag">#<%= tag %></span>
+    <% }) %>
+  </div>
+</div>
+<% }) %> <% } %>
 
 <div style="margin-top: 2rem">
   <a href="/">&larr; Retour à l'accueil</a>

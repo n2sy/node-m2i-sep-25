@@ -1,6 +1,5 @@
 <h1>📚 Mon Blog Express</h1>
 
-Barre de recherche
 <div class="search-form">
   <form method="GET">
     <input
@@ -24,21 +23,23 @@ Barre de recherche
 
 <% if (articles.length === 0) { %>
 <div class="error">
-  Aucun article trouvé ...
-  <a href="/new-article">Créer votre premier article</a>
+  Aucun article trouvé. <a href="/new-article">Créer le premier article</a>
 </div>
-
-<% } else { %> <% articles.forEach(element => { %>
+<% } else { %> <% articles.forEach(article => { %>
 <div class="article-card">
-  <h2><a href="/article/<%= element.id %>"><%= element.title %></a></h2>
+  <h2><a href="/article/<%= article.id %>"><%= article.title %></a></h2>
   <div class="meta">
-    <a href="author/<%= element.author %>"> <%= element.author %> </a>
-    <p><%= element.content.substring(0, 30) %></p>
-    <div>
-      <% element.tags.forEach(tag => { %>
-      <span class="tag">#<%= tag %></span>
-      <% }) %>
-    </div>
+    Par
+    <a href="/author/<%= encodeURIComponent(article.author) %>"
+      ><%= article.author %></a
+    >
+    le <%= article.date.toLocaleDateString('fr-FR') %>
+  </div>
+  <p><%= article.content.substring(0, 150) %>...</p>
+  <div>
+    <% article.tags.forEach(tag => { %>
+    <span class="tag">#<%= tag %></span>
+    <% }) %>
   </div>
 </div>
 <% }) %> <% } %>

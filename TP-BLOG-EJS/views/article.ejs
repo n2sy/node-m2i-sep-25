@@ -1,9 +1,20 @@
-<!-- Afficher les informations sur un article donnée -->
 <h1><%= article.title %></h1>
 
-<div class="meta">Par <%= article.author %></div>
+<div class="meta">
+  Par
+  <a href="/author/<%= article.author %>"><%= article.author %></a>
+  le <%= article.date.toLocaleDateString('fr-FR') %>
+</div>
 
-<div><%= article.content %></div>
+<div style="margin: 2rem 0">
+  <% article.tags.forEach(tag => { %>
+  <span class="tag">#<%= tag %></span>
+  <% }) %>
+</div>
+
+<div style="line-height: 1.6; margin: 2rem 0"><%= article.content %></div>
+
+<hr />
 
 <div style="margin-top: 2rem">
   <a href="/">&larr; Retour à l'accueil</a>
