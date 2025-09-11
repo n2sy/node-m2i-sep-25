@@ -22,7 +22,23 @@ Barre de recherche
   totalArticles %> article(s) <% } %>
 </p>
 
-<!--  Afficher "Aucun article trouvé" si aucun article n'est trouvé
- Sinon afficher tous les articles correspondant à ce qui a été tapé dans la barre de recherche
- Sinon afficher tous les articles -->
-<% if (articles.length === 0) { %> <% } else { %>
+<% if (articles.length === 0) { %>
+<div class="error">
+  Aucun article trouvé ...
+  <a href="/new-article">Créer votre premier article</a>
+</div>
+
+<% } else { %> <% articles.forEach(element => { %>
+<div class="article-card">
+  <h2><a href="/article/<%= element.id %>"><%= element.title %></a></h2>
+  <div class="meta">
+    <a href="author/<%= element.author %>"> <%= element.author %> </a>
+    <p><%= element.content.substring(0, 30) %></p>
+    <div>
+      <% element.tags.forEach(tag => { %>
+      <span class="tag">#<%= tag %></span>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<% }) %> <% } %>

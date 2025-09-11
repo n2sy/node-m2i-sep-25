@@ -6,12 +6,22 @@ const app = express();
 const PORT = 3000;
 
 // Configuration EJS
+const ejs = require("ejs");
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
 
 // Configuration express-ejs-layouts
+app.use(expressLayouts);
+app.set("layout", "layout");
 
-// Middleware pour lire les données d'un formulaire et du JSON
+// Middleware pour lire les données d'un formulaire
+app.use(express.urlencoded());
 
 // Middleware pour variables par défaut
+app.use((req, res, next) => {
+  res.locals.title = "Exercice EJS";
+  next();
+});
 
 // Données simulées (en mémoire)
 let articles = [
@@ -42,9 +52,30 @@ let articles = [
 ];
 
 // Routes
-app.get("/", (req, res) => {});
+app.get("/", (req, res) => {
+  const searchValue = req.query.search;
+  let filtredArticles = articles;
+  if (searchValue)
+    filtredArticles = articles.filter((element) =>
+      element.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
-app.get("/article/:id", (req, res) => {});
+  res.render("index", {
+    articles: filtredArticles,
+    search: "",
+    totalArticles: filtredArticles.length,
+  });
+});
+
+app.get("/article/:id", (req, res, next) => {
+  const id = req.params.id;
+  let articleCible = articles.find((a) => a.id == id);
+  if (!articleCible) next();
+
+  res.render("article", {
+    article: articleCible,
+  });
+});
 
 app.get("/new-article", (req, res) => {});
 
@@ -53,7 +84,12 @@ app.post("/new-article", (req, res) => {});
 app.get("/author/:name", (req, res) => {});
 
 // Route 404
-app.use((req, res) => {});
+app.use((req, res) => {
+  res.status(404).render("error", {
+    message: "Page non trouvée",
+    statusCode: 404,
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
