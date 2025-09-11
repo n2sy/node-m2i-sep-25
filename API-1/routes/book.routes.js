@@ -6,10 +6,12 @@ const {
   updateBook,
   deleteBook,
   restoreBook,
+  searchBooks,
 } = require("../controllers/book.controller");
 const router = express.Router();
 
 router.get("/", getAllBooks);
+router.get("/search", searchBooks);
 router.get("/:id", getBookById);
 router.post("/add", addBook);
 router.put("/edit/:id", updateBook);

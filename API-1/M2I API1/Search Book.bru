@@ -1,0 +1,27 @@
+meta {
+  name: Search Book
+  type: http
+  seq: 8
+}
+
+patch {
+  url: http://localhost:3001/books/restore/68c2ce5dbc4e5766d3e7eefc
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "title": "Toi et Moi revisité",
+      "author": "Vincent et Laurent",
+      "year": 2019,
+      "genre": "tragédie",
+      "avatar": "cover.jpg",
+      "isDeleted": false,
+      "deleteAt": null
+  }
+}
+
+settings {
+  encodeUrl: true
+}

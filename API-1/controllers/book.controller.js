@@ -86,4 +86,21 @@ exports.restoreBook = async (req, res, next) => {
   }
 };
 
-exports.searchBook = (req, res) => {};
+exports.searchBooks = (req, res, next) => {
+  let y1 = req.query.year1;
+  let y2 = req.query.year2;
+
+  Book.find({
+    year: {
+      $gte: y1,
+      $lte: y2,
+    },
+  })
+    .notDeleted()
+    .then((data) => {
+      return res.json(data);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
