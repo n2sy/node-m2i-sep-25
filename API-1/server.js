@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const bookRoutes = require("./routes/book.routes");
+const authorRoutes = require("./routes/author.routes");
 require("dotenv").config();
 
 const app = express();
@@ -8,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/books", bookRoutes);
+app.use("/authors", authorRoutes);
 
 //Le middleware de gestion des erreurs doit toujours être le dernier
 app.use((error, req, res, next) => {

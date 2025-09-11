@@ -1,0 +1,25 @@
+meta {
+  name: Add Author
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:3001/books/add
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "des formules",
+    "author" : "Guy Le Maupassant",
+    "year": 2021,
+    "avatar" : "cover.jpg",
+    "genre" : "fiction"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
