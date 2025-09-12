@@ -31,6 +31,12 @@ exports.getBookById = async (req, res, next) => {
 exports.addBook = async (req, res, next) => {
   let newBook = new Book(req.body);
   //newBook.isDeleted = false;
+
+  if (req.body.avatar) {
+    const urlAvatar =
+      req.protocol + "://" + req.get("host") + "/avatars/" + req.body.avatar;
+    newBook.avatar = urlAvatar;
+  }
   try {
     let data = await newBook.save();
     return res.status(201).json({
