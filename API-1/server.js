@@ -3,6 +3,7 @@ const connectDB = require("./config/db");
 const bookRoutes = require("./routes/book.routes");
 const authorRoutes = require("./routes/author.routes");
 const avatarRoutes = require("./routes/avatar.routes");
+const userRoutes = require("./routes/user.routes");
 require("dotenv").config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use("/avatars", express.static("covers"));
 app.use("/images/upload", avatarRoutes);
 app.use("/books", bookRoutes);
 app.use("/authors", authorRoutes);
+app.use("/auth", userRoutes);
 
 //Le middleware de gestion des erreurs doit toujours être le dernier
 app.use((error, req, res, next) => {
