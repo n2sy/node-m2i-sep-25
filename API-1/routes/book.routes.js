@@ -8,9 +8,11 @@ const {
   restoreBook,
   searchBooks,
 } = require("../controllers/book.controller");
+const isAuth = require("../middlewares/auth.middleware");
+const isAdmin = require("../middlewares/role.middleware");
 const router = express.Router();
 
-router.get("/", getAllBooks);
+router.get("/", isAuth, getAllBooks);
 router.get("/search", searchBooks);
 router.get("/:id", getBookById);
 router.post("/add", addBook);

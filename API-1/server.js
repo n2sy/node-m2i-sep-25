@@ -9,7 +9,6 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-
 app.use("/avatars", express.static("covers"));
 app.use("/images/upload", avatarRoutes);
 app.use("/books", bookRoutes);

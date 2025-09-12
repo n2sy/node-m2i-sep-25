@@ -4,9 +4,9 @@ meta {
   seq: 11
 }
 
-get {
-  url: http://localhost:3001/authors
-  body: file
+post {
+  url: http://localhost:3001/images/upload
+  body: multipartForm
   auth: inherit
 }
 
@@ -18,6 +18,10 @@ body:json {
     "avatar" : "cover.jpg",
     "genre" : "fiction"
   }
+}
+
+body:multipart-form {
+  avatar: @file(/Users/nidhal/Workspace/Express/node_m2i_sep_25/API-1/covers/node.png)
 }
 
 body:file {

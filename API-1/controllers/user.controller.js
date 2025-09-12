@@ -41,6 +41,7 @@ exports.login = async (req, res, next) => {
 
     if (!user) {
       let error = new Error("Username ou Email invalide");
+      error.status = 404;
       throw error;
     } else {
       let pwdMatching = await bcrypt.compare(password, user.password);
@@ -50,7 +51,10 @@ exports.login = async (req, res, next) => {
       } else {
         // les mots de passes matchent
         const generatedToken = jwt.sign(
-          { name: user.name, role: user.role, id: user.id },
+          {
+            // name: user.name, role: user.role,
+            id: user.id,
+          },
           process.env.secretkey,
           {
             expiresIn: "1d",

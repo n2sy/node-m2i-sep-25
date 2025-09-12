@@ -1,6 +1,8 @@
 const Book = require("../models/book.model");
 
 exports.getAllBooks = async (req, res, next) => {
+  console.log(req);
+
   let filter = req.query.by;
   try {
     let data = await Book.find({
