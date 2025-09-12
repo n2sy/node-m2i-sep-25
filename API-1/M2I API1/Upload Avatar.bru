@@ -1,0 +1,30 @@
+meta {
+  name: Upload Avatar
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:3001/authors
+  body: file
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "des formules",
+    "author" : "Guy Le Maupassant",
+    "year": 2021,
+    "avatar" : "cover.jpg",
+    "genre" : "fiction"
+  }
+}
+
+body:file {
+  file: @file()
+  ~file: @file(/Users/nidhal/Workspace/Express/node_m2i_sep_25/API-1/covers/node.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+}

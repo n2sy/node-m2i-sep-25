@@ -6,6 +6,7 @@ exports.getAllAuthors = async (req, res, next) => {
       .populate({
         path: "books",
         match: { isDeleted: false },
+        select: "title genre",
       })
       .lean();
     return res.json(data);

@@ -2,12 +2,15 @@ const express = require("express");
 const connectDB = require("./config/db");
 const bookRoutes = require("./routes/book.routes");
 const authorRoutes = require("./routes/author.routes");
+const avatarRoutes = require("./routes/avatar.routes");
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
 
+app.use("/avatars", express.static("covers"));
+app.use("/images/upload", avatarRoutes);
 app.use("/books", bookRoutes);
 app.use("/authors", authorRoutes);
 
