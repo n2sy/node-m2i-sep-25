@@ -1,0 +1,34 @@
+meta {
+  name: Register User
+  type: http
+  seq: 12
+}
+
+post {
+  url: http://localhost:3001/images/upload
+  body: multipartForm
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "des formules",
+    "author" : "Guy Le Maupassant",
+    "year": 2021,
+    "avatar" : "cover.jpg",
+    "genre" : "fiction"
+  }
+}
+
+body:multipart-form {
+  avatar: @file(/Users/nidhal/Workspace/Express/node_m2i_sep_25/API-1/covers/node.png)
+}
+
+body:file {
+  file: @file()
+  ~file: @file(/Users/nidhal/Workspace/Express/node_m2i_sep_25/API-1/covers/node.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+}
