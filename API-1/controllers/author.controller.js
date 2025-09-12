@@ -2,7 +2,12 @@ const Author = require("../models/author.model");
 
 exports.getAllAuthors = async (req, res, next) => {
   try {
-    let data = await Author.find({});
+    let data = await Author.find({})
+      .populate({
+        path: "books",
+        match: { isDeleted: false },
+      })
+      .lean();
     return res.json(data);
   } catch (err) {
     next(err);
