@@ -1,7 +1,12 @@
 const Book = require("../models/book.model");
+const winston = require("winston");
+
+const logger = winston.createLogger({
+  transports: [new winston.transports.File({ filename: "books.log" })],
+});
 
 exports.getAllBooks = async (req, res, next) => {
-  console.log(req);
+  logger.log("info", "Recuperer tous les livres");
 
   let filter = req.query.by;
   try {
@@ -16,6 +21,7 @@ exports.getAllBooks = async (req, res, next) => {
   }
 };
 exports.getBookById = async (req, res, next) => {
+  logger.log("info", "Recuperer le livre d'id " + req.params.id);
   try {
     let b = await Book.findById(req.params.id)
       .populate("author", "prenom nom")
@@ -31,6 +37,7 @@ exports.getBookById = async (req, res, next) => {
   }
 };
 exports.addBook = async (req, res, next) => {
+  logger.log("info", "Ajouter un livre");
   let newBook = new Book(req.body);
   //newBook.isDeleted = false;
 

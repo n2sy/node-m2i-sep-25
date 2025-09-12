@@ -12,7 +12,7 @@ const isAuth = require("../middlewares/auth.middleware");
 const role = require("../middlewares/role.middleware");
 const router = express.Router();
 
-router.get("/", isAuth, getAllBooks);
+router.get("/", isAuth, role("admin"), getAllBooks);
 router.get("/search", isAuth, searchBooks);
 router.get("/:id", isAuth, getBookById);
 router.post("/add", isAuth, role("admin"), addBook);
